@@ -20,8 +20,14 @@ namespace Demo_Token_JWT.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterForm form)
         {
-            var user = await _authService.RegisterAsync(form);
-            return Ok(user);
+            string? token = await _authService.RegisterAsync(form);
+            
+            if (token == null)
+            {
+                return BadRequest(new { message = "L'utilisateur existe déjà (username ou email)." });
+            }
+
+            return Ok(new { token });
         }
 
         [HttpPost("login")]
@@ -30,9 +36,12 @@ namespace Demo_Token_JWT.Controllers
             var result = await _authService.LoginAsync(form);
 
             if (result == null)
+            {
                 return Unauthorized(new { message = "Invalid credentials." });
+            }
 
-            return Ok(result);
+                return Ok(result);
+            
         }
     }
 }

@@ -20,6 +20,7 @@ namespace DAL.Data
 
             builder.Property(p => p.Id)
                 .HasDefaultValueSql("NEWID()");
+            //gen_random_uuid()
 
             builder.Property(p => p.Title)
                 .IsRequired()

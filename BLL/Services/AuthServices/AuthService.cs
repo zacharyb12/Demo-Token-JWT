@@ -28,7 +28,7 @@ namespace BLL.Services.AuthServices
         }
 
 
-        public async Task<string> RegisterAsync(RegisterForm form)
+        public async Task<string?> RegisterAsync(RegisterForm form)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace BLL.Services.AuthServices
             }
             catch(Exception ex)
             {
-                return string.Empty;
+                return null;
             }
         }
 
